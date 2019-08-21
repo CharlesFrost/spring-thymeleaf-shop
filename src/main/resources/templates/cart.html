@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div align="center">
+    <h1>Cart List</h1>
+    <a href="/logout">Logout</a>
+    <br/><br/>
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>Producent</th>
+            <th>Nazwa</th>
+            <!--<th>Price</th>-->
+            <!--<th>Ilość</th>-->
+            <!--<th>Usuń</th>-->
+            <th>Ilosc</th>
+            <th>Cena</th>
+            <th>Usuń</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cart : ${cart}">
+            <!--<td th:text="${cart.producer}">Producent</td>-->
+            <!--<td th:text="${cart.name}">Nazwa</td>-->
+            <!--<td th:text="${cart.price}">Cena</td>-->
+            <!--<td th:text="${cart.stock}">Ilość </td>-->
+            <td th:text="${cart.producer}">Producent</td>
+            <td th:text="${cart.name}">nazwa</td>
+            <td th:text="${cart.quantity}">Ilość</td>
+            <td th:text="${cart.price}">Cena</td>
+            <td>
+                <a th:href="@{'/cart/delete/' + ${cart.id}}">Usuń</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <tr><a th:href="@{/cart/finalize}">Finalizuj</a></tr>
+</div>
+</body>
+</html>
