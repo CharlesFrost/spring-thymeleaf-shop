@@ -33,6 +33,9 @@ public class UserController {
 
     @RequestMapping(value = "/user/save", method = RequestMethod.POST)
     public String saveProduct(@ModelAttribute("user") @Valid MyUser myUser, BindingResult bindingResult, Model model) {
+        myUser.setUsername(myUser.getUsername().trim());
+        myUser.setPassword(myUser.getPassword().trim());
+        myUser.setPasswordMatcher(myUser.getPasswordMatcher().trim());
         if (bindingResult.hasErrors()) {
             return "register";
         }
