@@ -5,6 +5,7 @@ import online.patologia.czaropedal.model.MyUser;
 import online.patologia.czaropedal.model.Product;
 import online.patologia.czaropedal.repo.ProductRepo;
 import online.patologia.czaropedal.repo.UserRepo;
+import online.patologia.czaropedal.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.PageRequest;
@@ -27,9 +28,7 @@ import java.util.List;
 public class ProductController {
 
     @Autowired
-    private ProductRepo productRepo;
-    @Autowired
-    private UserRepo userRepo;
+    private ProductService productService;
 
     @GetMapping("/")
     public String getAllProductsForEveryone(Model model,@RequestParam(defaultValue = "0") int page) {
@@ -41,7 +40,7 @@ public class ProductController {
                 products.add(product);
             }
         });*/
-        model.addAttribute("products",productRepo.findAvailable(PageRequest.of(page,5)));
+        model.addAttribute("products",productService.findAvailable(PageRequest.of(page,5)));
         model.addAttribute("currentPage",page);
 //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //
@@ -59,9 +58,9 @@ public class ProductController {
     public String getFilteredProducts(@ModelAttribute("product") Product selected, Model model,@RequestParam(defaultValue = "0") int page) {
         List<Product> products = new ArrayList<>();
         if (selected.getCategory().equals("ALL")) {
-            model.addAttribute("products",productRepo.findAvailable(PageRequest.of(page,5)));
+            model.addAttribute("products",productService.findAvailable(PageRequest.of(page,5)));
         }  else {
-            model.addAttribute("products",productRepo.findAvailableByCategory(selected.getCategory(),PageRequest.of(page,5)));
+            model.addAttribute("products",productService.findAvailableByCategory(selected.getCategory(),PageRequest.of(page,5)));
         }
 
         model.addAttribute("currentPage",page);
@@ -82,8 +81,8 @@ public class ProductController {
         if (bindingResult.hasErrors()) {
             return "new_product";
         } else {
-            productRepo.save(product);
-            model.addAttribute("products",productRepo.findAll());
+            productService.save(product);
+            model.addAttribute("products",productService.findAll());
             return "panel";
         }
     }
@@ -93,8 +92,8 @@ public class ProductController {
         if (bindingResult.hasErrors()) {
             return "edit_product";
         } else {
-            productRepo.save(product);
-            model.addAttribute("products",productRepo.findAll());
+            productService.save(product);
+            model.addAttribute("products",productService.findAll());
             return "panel";
         }
     }
@@ -102,14 +101,14 @@ public class ProductController {
 
     @RequestMapping("/product/delete/{id}")
     public String delete(@PathVariable(name = "id") Long id) {
-        productRepo.deleteById(id);
+        productService.deleteById(id);
         return "redirect:/panel";
     }
 
     @RequestMapping("/product/edit/{id}")
     public ModelAndView showEditProductPage(@PathVariable(name = "id") Long id) {
         ModelAndView mav = new ModelAndView("edit_product");
-        Product product = productRepo.getOne(id);
+        Product product = productService.getOne(id);
         mav.addObject("product", product);
 
         return mav;
@@ -119,7 +118,7 @@ public class ProductController {
     public ModelAndView showProduct(@PathVariable(name = "id") Long id ) {
         ModelAndView mav = new ModelAndView("product");
         mav.addObject("cart",new Cart());
-        Product product = productRepo.getOne(id);
+        Product product = productService.getOne(id);
         mav.addObject("product", product);
         mav.addObject("tooMuch",false);
         return mav;

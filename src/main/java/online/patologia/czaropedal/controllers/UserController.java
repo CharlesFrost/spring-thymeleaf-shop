@@ -4,6 +4,7 @@ import online.patologia.czaropedal.model.MyUser;
 import online.patologia.czaropedal.model.Product;
 import online.patologia.czaropedal.repo.ProductRepo;
 import online.patologia.czaropedal.repo.UserRepo;
+import online.patologia.czaropedal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,9 +21,7 @@ import javax.validation.Valid;
 @Controller
 public class UserController {
     @Autowired
-    private UserRepo userRepo;
-    @Autowired
-    private ProductRepo productRepo;
+    private UserService userService;
 
 
     @RequestMapping("/user/new")
@@ -37,7 +36,7 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "register";
         }
-        if (userRepo.findByUsername(myUser.getUsername()) != null) {
+        if (userService.findByUsername(myUser.getUsername()) != null) {
             model.addAttribute("accountExist",true);
             return "/register";
         }
@@ -47,7 +46,7 @@ public class UserController {
         }
         myUser.setRole("ROLE_USER");
         myUser.setPassword(passwordEncoder().encode(myUser.getPassword()));
-        userRepo.save(myUser);
+        userService.save(myUser);
         model.addAttribute("success",true);
         return "login";
 
