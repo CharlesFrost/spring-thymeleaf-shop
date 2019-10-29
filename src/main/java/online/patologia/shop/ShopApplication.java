@@ -9,10 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class CzaroPedalApplication {
+public class ShopApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CzaroPedalApplication.class, args);
+		SpringApplication.run(ShopApplication.class, args);
 	}
 
 	@Bean
