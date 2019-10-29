@@ -15,9 +15,6 @@
         <tr>
             <th>Producent</th>
             <th>Nazwa</th>
-            <!--<th>Price</th>-->
-            <!--<th>Ilość</th>-->
-            <!--<th>Usuń</th>-->
             <th>Ilosc</th>
             <th>Cena</th>
             <th>Usuń</th>
@@ -25,10 +22,6 @@
         </thead>
         <tbody>
         <tr th:each="cart : ${cart}">
-            <!--<td th:text="${cart.producer}">Producent</td>-->
-            <!--<td th:text="${cart.name}">Nazwa</td>-->
-            <!--<td th:text="${cart.price}">Cena</td>-->
-            <!--<td th:text="${cart.stock}">Ilość </td>-->
             <td th:text="${cart.producer}">Producent</td>
             <td th:text="${cart.name}">nazwa</td>
             <td th:text="${cart.quantity}">Ilość</td>

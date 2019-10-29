@@ -13,45 +13,6 @@
 <body>
 
 
-<!--    <form action="#" th:action="@{/user/save}" th:object="${user}" method="post">
-
-        <table border="0" cellpadding="10">
-            <tr>
-                <td>Username:</td>
-                <td><input type="text" th:field="*{username}" /></td>
-                <td><div th:if="${#fields.hasErrors('username')}"
-                         th:errors="*{username}"></div></td>
-                <div th:if="${accountExist == true}">
-                    Konto o takim username już istnieje!
-                </div>
-            </tr>
-            <tr>
-                <td>Hasło:</td>
-                <td><input type="password" th:field="*{password}" /></td>
-                <td><div th:if="${#fields.hasErrors('password')}"
-                         th:errors="*{password}"></div></td>
-            </tr>
-            <tr>
-                <td>Powtórz hasło:</td>
-                <td><input type="password" th:field="*{passwordMatcher}" /></td>
-                <div th:if="${wrongPass == true}">
-                    Hasła muszą być takie same!
-                </div>
-            </tr>
-            <tr>
-                <td>Email:</td>
-                <td><input type="text" th:field="*{email}" /></td>
-                <td><div th:if="${#fields.hasErrors('email')}"
-                         th:errors="*{email}"></div></td>
-            </tr>
-            <tr>
-                <td colspan="2"><button type="submit">Zapisz</button> </td>
-                <td colspan="2"><button type="reset">Wyczyść</button> </td>
-            </tr>
-        </table>
-    </form>-->
-
-
     <div class="container">
         <h1>Rejestracja</h1>
         <form action="#" th:action="@{/user/save}" th:object="${user}" method="post">

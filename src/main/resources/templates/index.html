@@ -15,7 +15,7 @@
 
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">Sklep z ziołem</a>
+        <a class="navbar-brand" href="/">Sklep</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -39,13 +39,8 @@
             <form class="form-inline my-2 my-lg-0" action="#" th:action="@{/search}" method="post" th:object="${product}">
                 <select th:field="*{category}" onchange="this.form.submit()" class="form-control">
                     <option th:value="ALL">WSZYSTKIE</option>
-                    <option th:value="RC">RC</option>
-                    <option th:value="BENZO">BENZO</option>
-                    <option th:value="AMPH">AMPH</option>
-                    <option th:value="LSD">LSD</option>
-                    <option th:value="WEED">WEED</option>
-                    <option th:value="PILL">PILL</option>
-                    <option th:value="COKE">COKE</option>
+                    <option th:value="'PHONE'" th:text="PHONE">PHONE</option>
+                    <option th:value="'LAPTOP'" th:text="LAPTOP">LAPTOP</option>
                 </select>
                 <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
             </form>
